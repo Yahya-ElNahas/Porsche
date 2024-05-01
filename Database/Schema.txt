@@ -1,0 +1,8 @@
+use PorscheDB
+
+db.Admins.insertOne({email: "yahya@gmail.com", username: "yahya", password: "1234"})
+
+db.Customers.insertOne({email: "youssef@gmail.com", username: "youssef", password: "12345", first_name: "Youssef", last_name: "Seyam", mobile_numbers: ["012345678", "0987654321"], addresses: ["New Cairo", "Maadi"], age: 20})
+
+db.Products.insertOne({name: "Porsche 911", description: "The legendary 911", price: "$200,000", quantity: 3})
+
