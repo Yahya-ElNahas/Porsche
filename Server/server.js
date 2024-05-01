@@ -2,10 +2,35 @@ require("dotenv").config()
 const express = require("express")
 const {connectToDb, getDbConn} = require('./database_connection')
 const {ObjectId} = require("mongodb")
+const jwt = require("jsonwebtoken")
+const express_jwt = require("express-jwt")
 
 const app = express()
-
 const port = 5000 || process.env.PORT
+const jwt_secret_key = "Y22!Y8!N20.H04?"
+
+function generateToken(payload) {
+    return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
+}
+
+function verifyToken(token) {
+    return jwt.verify(token, jwt_secret_key)
+}
+
+function authenticateJWT(req, res, next) {
+    const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
+    if(!token) {
+        return res.status(401).json({error: "Unauthorized access"})
+    }
+    try {
+        const decodedToken = verifyToken(token)
+        req.user = decodedToken
+        next()
+    }
+    catch(err) {
+        return res.status(401).json({error: "Invalid Token"})
+    }
+}
 
 app.use(express.json())
 
@@ -24,7 +49,7 @@ connectToDb((err) => {
 // Admins:
 
 // Get all admins
-app.get("/v1/api/Admins", (req, res) => {
+app.get("/v1/api/Admins", authenticateJWT, (req, res) => {
     let admins = []
     database.collection('Admins')
     .find()
@@ -39,7 +64,7 @@ app.get("/v1/api/Admins", (req, res) => {
 })
 
 // Get admin by username
-app.get("/v1/api/Admins/:id", (req, res) => {
+app.get("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
     let user = req.params.id
     user = fix_input(user)
     database.collection('Admins')
@@ -66,7 +91,7 @@ app.post("/v1/api/Admins", (req, res) => {
 })
 
 // Update specific admin data by username
-app.patch("/v1/api/Admins/:id", (req, res) => {
+app.patch("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
@@ -81,7 +106,7 @@ app.patch("/v1/api/Admins/:id", (req, res) => {
 })
 
 // Update all admin data by username
-app.put("/v1/api/Admins/:id", (req, res) => {
+app.put("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
@@ -96,7 +121,7 @@ app.put("/v1/api/Admins/:id", (req, res) => {
 })
 
 // Delete admin by username
-app.delete("/v1/api/Admins/:id", (req, res) => {
+app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
     let user = req.id
     user = fix_input(user)
     database.collection("Admins")
@@ -113,7 +138,7 @@ app.delete("/v1/api/Admins/:id", (req, res) => {
 // Customers:
 
 // Get all Customers
-app.get("/v1/api/Customers", (req, res) => {
+app.get("/v1/api/Customers", authenticateJWT, (req, res) => {
     let user = req.params.id
     user = fix_input(user)
     database.collection('Customers')
@@ -127,7 +152,7 @@ app.get("/v1/api/Customers", (req, res) => {
 })
 
 // Get customer by username
-app.get("/v1/api/Customers/:id", (req, res) => {
+app.get("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
     let user = req.params.id
     user = fix_input(user)
     database.collection('Customers')
@@ -140,7 +165,7 @@ app.get("/v1/api/Customers/:id", (req, res) => {
     })
 })
 
-// Add new admin
+// Add new Customer
 app.post("/v1/api/Customers", (req, res) => {
     const admin = req.body
     database.collection("Customers")
@@ -153,8 +178,8 @@ app.post("/v1/api/Customers", (req, res) => {
     })
 })
 
-// Update specific admin data by username
-app.patch("/v1/api/Customers/:id", (req, res) => {
+// Update specific Customer data by username
+app.patch("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
@@ -168,8 +193,8 @@ app.patch("/v1/api/Customers/:id", (req, res) => {
     })
 })
 
-// Update all admin data by username
-app.put("/v1/api/Customers/:id", (req, res) => {
+// Update all Customer data by username
+app.put("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
@@ -183,8 +208,8 @@ app.put("/v1/api/Customers/:id", (req, res) => {
     })
 })
 
-// Delete admin by username
-app.delete("/v1/api/Customers/:id", (req, res) => {
+// Delete Customer by username
+app.delete("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
     let user = req.id
     user = fix_input(user)
     database.collection("Customers")
@@ -229,8 +254,8 @@ app.get("/v1/api/Products/:id", (req, res) => {
     })
 })
 
-// Add new admin
-app.post("/v1/api/Products", (req, res) => {
+// Add new Product
+app.post("/v1/api/Products", authenticateJWT, (req, res) => {
     const admin = req.body
     database.collection("Products")
     .insertOne(admin)
@@ -242,13 +267,17 @@ app.post("/v1/api/Products", (req, res) => {
     })
 })
 
-// Update specific admin data by username
-app.patch("/v1/api/Products/:id", (req, res) => {
+// Update specific Product data by id
+app.patch("/v1/api/Products/:id", authenticateJWT, (req, res) => {
     const body = req.body
-    let user = req.params.id
-    user = fix_input(user)
+    let id = req.params.id
+    id = fix_input(id)
+    if(!ObjectId.isValid(id)) {
+        res.status(500).json({err: "Invalid Product ID"})
+        return
+    }
     database.collection("Products")
-    .updateOne({username: user}, {$set: body})
+    .updateOne({_id: ObjectId(id)}, {$set: body})
     .then(doc => {
         res.status(200).json(doc)
     })
@@ -257,13 +286,17 @@ app.patch("/v1/api/Products/:id", (req, res) => {
     })
 })
 
-// Update all admin data by username
-app.put("/v1/api/Products/:id", (req, res) => {
+// Update all Product data by id
+app.put("/v1/api/Products/:id", authenticateJWT, (req, res) => {
     const body = req.body
-    let user = req.params.id
-    user = fix_input(user)
+    let id = req.params.id
+    id = fix_input(id)
+    if(!ObjectId.isValid(id)) {
+        res.status(500).json({err: "Invalid Product ID"})
+        return
+    }
     database.collection("Products")
-    .updateOne({username: user}, {$set: body}, {upsert: true})
+    .updateOne({_id: ObjectId(id)}, {$set: body}, {upsert: true})
     .then(doc => {
         res.status(200).json(doc)
     })
@@ -272,8 +305,8 @@ app.put("/v1/api/Products/:id", (req, res) => {
     })
 })
 
-// Delete admin by username
-app.delete("/v1/api/Products/:id", (req, res) => {
+// Delete Product by id
+app.delete("/v1/api/Products/:id", authenticateJWT, (req, res) => {
     let user = req.id
     user = fix_input(user)
     database.collection("Products")
