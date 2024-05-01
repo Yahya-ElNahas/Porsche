@@ -7,7 +7,7 @@ const express_jwt = require("express-jwt")
 
 const app = express()
 const port = 5000 || process.env.PORT
-const jwt_secret_key = "Y22!Y8!N20.H04?"
+const jwt_secret_key = process.env.SECRET_KEY
 
 function generateToken(payload) {
     return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
