@@ -4,20 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/index-style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.cdnfonts.com/css/911-porscha" rel="stylesheet">
     <title>Porsche</title>
   </head>
   <body>
-    <main>
-    </main>
       <div class="control-panel">
-        <div class="logo">
-          <img class="img" src="/res/Porsche-Logo.svg">
-        </div>
-        <a href="login.html"><i class="fa fa-fw fa-user"></i> Login</a>
-        <a href="register.html"><i class="fa fa-fw fa-user"></i> Register</a>
-        <a href="about.html"><i class="fa fa-fw fa-home"></i> About us</a>
-        <a href="contact-us.html"><i class="fa fa-fw fa-envelope"></i> Contact us</a>
+        <ul>
+          <div class="logo">
+            <li>
+              <a>
+                <span class="icon"><img class="img" src="/res/Porsche-Logo.svg"></span> 
+                <span class="txt">Porsche</span>
+              </a>
+            </li>
+          </div>
+          <li>
+            <a href="login.html">
+              <span class="icon"><ion-icon name="log-in-outline"></ion-icon></span> 
+              <span class="txt">Login</span>
+            </a>
+          </li>
+          <li>
+            <a href="register.html">
+              <span class="icon"><ion-icon name="person-add-outline"></ion-icon></span>
+              <span class="txt">Register</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html">
+              <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+              <span class="txt">About us</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact-us.html">
+              <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+              <span class="txt">Contact us</span>
+            </a>
+          </li>
+          <div class="reload">
+            <li>
+              <a href="load.html">
+                <span class="icon"><ion-icon name="reload-circle-outline"></ion-icon></span>
+                <span class="txt">Reload Page</span>
+              </a>
+            </li>
+          </div>
+        </ul>
       </div>
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
 </html>
