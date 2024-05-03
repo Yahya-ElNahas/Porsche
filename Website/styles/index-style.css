@@ -1,15 +1,11 @@
-@font-face {
-  font-family: baskerville;
-  src: url('/res/LibreBaskerville-Regular.ttf');
-}
-
 * {
   margin: 0;
   padding: 0;
-  font-family: baskerville;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
+  margin: 0;
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url(https://i.pinimg.com/originals/4f/ff/26/4fff26af3cd2a86990cdb50820946141.jpg);
@@ -18,40 +14,79 @@ body {
 }
 
 .control-panel {
+  position: absolute;
+  width: 60px;
   height: 100%;
-  width: 9%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #1c1c1c;
-  overflow-x: hidden;
-  padding-top: 0px;
-  border: 1px solid white;
-  border-left: none;
-  border-bottom: none;
+  background: #1c1c1c;
+  overflow: hidden;
+  transition: 0.5s;
 }
 
-.control-panel a {
-  padding: 15px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #d5d5d5;
-  display: block;
+.control-panel:hover {
+  width: 200px;
 }
 
-.control-panel a:hover {
-  color: #f1f1f1;
-}
-
-.logo {
-  border-bottom: 1px solid white;
-  background-color: #191919;
-}
-
-.img {
-  width: 100%;
+.control-panel ul {
   position: relative;
-  transition: 1s;
+  height: 100%;
+}
+
+.control-panel ul li {
+  list-style: none;
+}
+
+.control-panel ul li a {
+  left: 0.5px;
+  position: relative;
+  display: flex;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #a1a1a1;
+  transition: 0.3s;
+}
+
+.control-panel ul li a:hover {
+  color: white;
+}
+
+.control-panel ul li a .icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 60px;
+  height: 60px;
+  font-size: 1.5em;
+}
+
+.control-panel ul li a .txt {
+  position: relative;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.control-panel .logo {
+  margin-bottom: 50px;
+}
+
+.control-panel ul .logo a img {
+  margin-top: 10px;
+  width: 80px;
+  position: absolute;
   padding-top: 5px;
+}
+
+.control-panel ul .logo a .txt {
+  font-family: '911 Porscha', sans-serif;
+  color: white;
+}
+
+.reload {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
