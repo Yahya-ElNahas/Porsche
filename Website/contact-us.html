@@ -2,45 +2,86 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/styles/contact-us-style.css">
+    <link href="https://fonts.cdnfonts.com/css/911-porscha" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact us</title>
 </head>
 <body>
+        <div class="control-panel">
+            <ul>
+              <div class="logo">
+                <li>
+                  <a>
+                    <span class="icon"><img class="img" src="/res/Porsche-Logo.svg"></span> 
+                    <span class="txt">Porsche</span>
+                  </a>
+                </li>
+              </div>
+              <li>
+                <a href="login.html">
+                  <span class="icon"><ion-icon name="log-in-outline"></ion-icon></span> 
+                  <span class="txt">Login</span>
+                </a>
+              </li>
+              <li>
+                <a href="register.html">
+                  <span class="icon"><ion-icon name="person-add-outline"></ion-icon></span>
+                  <span class="txt">Register</span>
+                </a>
+              </li>
+              <li>
+                <a href="contact-us.html">
+                  <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                  <span class="txt">Contact us</span>
+                </a>
+              </li>
+              <div class="reload">
+                <li>
+                  <a href="load.html">
+                    <span class="icon"><ion-icon name="reload-circle-outline"></ion-icon></span>
+                    <span class="txt">Reload Page</span>
+                  </a>
+                </li>
+              </div>
+            </ul>
+          </div>
+          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <div class="background" id="background1"></div>
-  
-    <div class = 'head'>
-    <h2>Contact us</h2>
-    </div>
-     
-    <form id = "form">
 
-        <div class = "formkolo">
-            <label for = "name">Name:</label>
-            <input id="name" name="name" required placeholder="Your name">
-            <label for = "email">Email:</label>
-            <input id="email" name="email" required placeholder = "Example@gmail.com">
-            <label>Subject:</label> 
-            <select id="myDropdown">
-                <option value = "Customer support">Customer support</option>
-                <option value = "Car issues">Car issues</option>
-            </select> 
-            <label for = "message">Message:</label>
-            <input id="message" name="message" required placeholder = "...">
-        <button type = "submit">Send message</button>
-      </div>
-      <div class="ids">
-        <div class="info">
-            <p> Thank you for your feedback!</p>
-            <p> We will get back to you soon. In the meantime feel free to cotact us:</p>
-            <p>01007513685</p>
-            <p>Emails: youssef.imnm@gmail.com </p>
+    <div class="main">
+        <div class="lr-form">
+            <div class="container">
+                <h1 class="hdr">Porsche</h1>
+                <form class="form">
+                    <div class="input-group">
+                        <label for="last-name">Name</label>
+                        <input type="text" name="last-name" id="last-name">
+                    </div>
+                    <div class="input-group">
+                        <label for="mobile-number">Email</label>
+                        <input type="tel" name="mobile-number" id="mobile-number">
+                    </div>
+                    <!-- <div class="input-group">
+                        <label for="address">Address</label>
+                        <input type="text" name="address" id="address">
+                    </div> -->
+                    <div class="input-group">
+                        <div class="input-group">
+                            <label for="feedback">Your Feedback:</label>
+                            <textarea id="feedback" name="feedback" rows="6" cols="50" class="feedback-textarea"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+                
+            </div>
         </div>
-      </div>
-      
-    </form> 
-    <a href="/index.html"> <img class="image" src="/res/Porsche-Logo.svg"></a>
-</div> 
+    </div>
+</body>
+</html>
+
 
 
 </body>
