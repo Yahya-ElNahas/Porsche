@@ -255,10 +255,10 @@ app.delete("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
 // Products:
 
 // Get all products
-app.get("/v1/api/Products", async(req, res) => {
+app.get("/v1/api/Products", authenticateJWT,async(req, res) => {
     try {
         const  Products = await database.collection("Products").find({}).sort().toArray();
-        res.json({ "Customers": Products});
+        res.json({ "Products": Products});
       } catch (err) {
         console.error('Failed to retrieve Products:', err);
         res.status(200).json({ error: 'Failed to retrieve Products'});
