@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 const express_jwt = require("express-jwt")
 
 const app = express()
-const port = 5000 || process.env.PORT
+const port = process.env.PORT || 5000
 const jwt_secret_key = process.env.SECRET_KEY
 
 function generateToken(payload) {
