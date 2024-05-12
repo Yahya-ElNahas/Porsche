@@ -49,7 +49,7 @@ connectToDb((err) => {
 // Admins:
 
 // Get all admins
-app.get('/v1/api/Admins',async (req, res) => {
+app.get('/v1/api/Admins',authenticateJWT,async (req, res) => {
     try {
       const admins = await database.collection("Admins").find({}).sort().toArray();
       res.json({"Admins": admins});
@@ -152,7 +152,7 @@ app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
 // Customers:
 
 // Get all Customers
-app.get("/v1/api/Customers",async (req, res) => {
+app.get("/v1/api/Customers",authenticateJWT,async (req, res) => {
     try {
         const Customers = await database.collection("Customers").find({}).sort().toArray();
         res.json({ "Customers": Customers});
