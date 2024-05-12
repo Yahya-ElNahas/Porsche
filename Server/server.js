@@ -77,6 +77,24 @@ app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
     })
 })
 
+// Admin Login
+app.get("/v1/api/Admins/Login/:id", async (req, res) => {
+    let user = req.params.id
+    user = fix_input(user)
+    await database.collection('Admins')
+    .findOne({username: user})
+    .then(doc => {
+        if(req.body.password != doc.password) {
+            res.status(500).json({Failure: "Incorrect password"})
+            return
+        }
+        res.status(200).json(doc)
+    })
+    .catch(err => {
+        res.status(500).json({Failure: "Incorrect username"})
+    })
+})
+
 // Add new admin
 app.post("/v1/api/Admins", (req, res) => {
     const admin = req.body
@@ -152,7 +170,7 @@ app.get("/v1/api/Customers", authenticateJWT,async (req, res) => {
 })
 
 // Get customer by username
-app.get("/v1/api/Customers/:id", authenticateJWT, async (req, res) => {
+app.get("/v1/api/Customers/:id", authenticateJWT,async (req, res) => {
     let user = req.params.id
     user = fix_input(user)
     await database.collection('Customers')
@@ -162,6 +180,24 @@ app.get("/v1/api/Customers/:id", authenticateJWT, async (req, res) => {
     })
     .catch(err => {
         res.status(500).json({err: "Error"})
+    })
+})
+
+// Customer Login
+app.get("/v1/api/Customers/Login/:id", async (req, res) => {
+    let user = req.params.id
+    user = fix_input(user)
+    await database.collection('Customers')
+    .findOne({username: user})
+    .then(doc => {
+        if(req.body.password != doc.password) {
+            res.status(500).json({Failure: "Incorrect password"})
+            return
+        }
+        res.status(200).json({Success: doc})
+    })
+    .catch(err => {
+        res.status(500).json({Failure: "Incorrect username"})
     })
 })
 
