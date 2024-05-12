@@ -8,7 +8,7 @@ module.exports = {
             return cb()
         })
         .catch(err => {
-            console.log(err)
+            console.log("Error",err)
             return cb(err)
         })
     },
