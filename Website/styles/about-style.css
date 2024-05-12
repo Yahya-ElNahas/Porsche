@@ -11,10 +11,14 @@ body {
     color: white;
     font-style: normal;
     min-height: 100vh;
-    display: grid;
-    place-items: center;
     transition: width 0.5s; 
 }
+
+.about {
+  display: grid;
+  place-items: center;
+}
+
 .row {
   width: 80%;
   max-width: 1170px;
@@ -100,6 +104,7 @@ body {
   font-weight: 700;
   color: #ffffff;
   padding-bottom: 2px;
+  cursor: default;
   font-family: '911 Porscha', sans-serif;
   
   --s: 0.1em;   /* the thickness of the line */
@@ -128,6 +133,7 @@ transition: 0.56s;
   font-weight: 700;
   color: #ffffff;
   padding-bottom: 2px;
+  cursor: default;
   font-family: '911 Porscha', sans-serif;
   
   --s: 0.1em;   /* the thickness of the line */
@@ -156,6 +162,7 @@ transition: 0.56s;
 
 .control-panel {
     position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
     width: 60px;
     height: 100%;
     background: #1c1c1c;
