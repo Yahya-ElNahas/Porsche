@@ -256,9 +256,9 @@ app.get("/v1/api/Products/:id", (req, res) => {
 
 // Add new Product
 app.post("/v1/api/Products", authenticateJWT, (req, res) => {
-    const admin = req.body
+    const product = req.body
     database.collection("Products")
-    .insertOne(admin)
+    .insertOne(product)
     .then(doc => {
         res.status(200).json(doc)
     })
