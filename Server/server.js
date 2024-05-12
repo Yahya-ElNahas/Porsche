@@ -7,7 +7,7 @@ const express_jwt = require("express-jwt")
 
 const app = express()
 const port = process.env.PORT || 5000
-const jwt_secret_key = process.env.SECRET_KEY
+const jwt_secret_key = process.env.SECRET_KEY  // node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 function generateToken(payload) {
     return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
@@ -39,7 +39,7 @@ let database
 connectToDb((err) => {
     if(!err) {
         app.listen(port, () => {
-            console.log("server is running: " + port)
+            console.log("server is running on: " + port)
         })
         database = getDbConn()
     }
@@ -49,19 +49,15 @@ connectToDb((err) => {
 // Admins:
 
 // Get all admins
-app.get("/v1/api/Admins", authenticateJWT, async (req, res) => {
-    let admins = []
-    await database.collection('Admins')
-    .find()
-    .sort()
-    .forEach(element => admins.push(element))
-    .then(() => {
-        res.status(200).json(admins)
-    })
-    .catch((err) => {
-        res.status(500).json({err: 'Could not fetch data'})
-    })
-})
+app.get('/v1/api/Admins',async (req, res) => {
+    try {
+      const admins = await database.collection("Admins").find({}).sort().toArray();
+      res.json({"Admins": admins});
+    } catch (err) {
+      console.error('Failed to retrieve admins:', err);
+      res.status(200).json({ error: 'Failed to retrieve admins' });
+    }
+  });
 
 // Get admin by username
 app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
@@ -156,17 +152,14 @@ app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
 // Customers:
 
 // Get all Customers
-app.get("/v1/api/Customers", authenticateJWT,async (req, res) => {
-    let user = req.params.id
-    user = fix_input(user)
-    await database.collection('Customers')
-    .findOne({username: user})
-    .then(doc => {
-        res.status(200).json(doc)
-    })
-    .catch(err => {
-        res.status(500).json({err: "Error"})
-    })
+app.get("/v1/api/Customers",async (req, res) => {
+    try {
+        const Customers = await database.collection("Customers").find({}).sort().toArray();
+        res.json({ "Customers": Customers});
+      } catch (err) {
+        console.error('Failed to retrieve Customers:', err);
+        res.status(200).json({ error: 'Failed to retrieve Customers'});
+      }
 })
 
 // Get customer by username
@@ -263,17 +256,13 @@ app.delete("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
 
 // Get all products
 app.get("/v1/api/Products", async(req, res) => {
-    let products = []
-    await database.collection('Products')
-    .find()
-    .sort()
-    .forEach(element => products.push(element))
-    .then(() => {
-        res.status(200).json(products)
-    })
-    .catch(err => {
-        res.status(500).json({error: 'could not fetch data'})
-    })
+    try {
+        const  Products = await database.collection("Products").find({}).sort().toArray();
+        res.json({ "Customers": Products});
+      } catch (err) {
+        console.error('Failed to retrieve Products:', err);
+        res.status(200).json({ error: 'Failed to retrieve Products'});
+      }
 })
 
 // Get product by product name
