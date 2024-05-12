@@ -49,9 +49,9 @@ connectToDb((err) => {
 // Admins:
 
 // Get all admins
-app.get("/v1/api/Admins", authenticateJWT, (req, res) => {
+app.get("/v1/api/Admins", authenticateJWT, async (req, res) => {
     let admins = []
-    database.collection('Admins')
+    await database.collection('Admins')
     .find()
     .sort()
     .forEach(element => admins.push(element))
@@ -64,10 +64,10 @@ app.get("/v1/api/Admins", authenticateJWT, (req, res) => {
 })
 
 // Get admin by username
-app.get("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
+app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
     let user = req.params.id
     user = fix_input(user)
-    database.collection('Admins')
+    await database.collection('Admins')
     .findOne({username: user})
     .then(doc => {
         res.status(200).json(doc)
@@ -138,10 +138,10 @@ app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
 // Customers:
 
 // Get all Customers
-app.get("/v1/api/Customers", authenticateJWT, (req, res) => {
+app.get("/v1/api/Customers", authenticateJWT,async (req, res) => {
     let user = req.params.id
     user = fix_input(user)
-    database.collection('Customers')
+    await database.collection('Customers')
     .findOne({username: user})
     .then(doc => {
         res.status(200).json(doc)
@@ -152,9 +152,9 @@ app.get("/v1/api/Customers", authenticateJWT, (req, res) => {
 })
 
 // Get customer by username
-app.get("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
+app.get("/v1/api/Customers/:id", authenticateJWT, async (req, res) => {
     let user = req.params.id
-    user = fix_input(user)
+    await user = fix_input(user)
     database.collection('Customers')
     .findOne({username: user})
     .then(doc => {
@@ -226,9 +226,9 @@ app.delete("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
 // Products:
 
 // Get all products
-app.get("/v1/api/Products", (req, res) => {
+app.get("/v1/api/Products", async(req, res) => {
     let products = []
-    database.collection('Products')
+    await database.collection('Products')
     .find()
     .sort()
     .forEach(element => products.push(element))
@@ -241,10 +241,10 @@ app.get("/v1/api/Products", (req, res) => {
 })
 
 // Get product by product name
-app.get("/v1/api/Products/:id", (req, res) => {
+app.get("/v1/api/Products/:id", async(req, res) => {
     let productName = req.params.id
     productName = fix_input(user)
-    database.collection('Admins')
+    await database.collection('Admins')
     .findOne({username: productName})
     .then(doc => {
         res.status(200).json(doc)
