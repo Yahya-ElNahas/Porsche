@@ -154,8 +154,8 @@ app.get("/v1/api/Customers", authenticateJWT,async (req, res) => {
 // Get customer by username
 app.get("/v1/api/Customers/:id", authenticateJWT, async (req, res) => {
     let user = req.params.id
-    await user = fix_input(user)
-    database.collection('Customers')
+    user = fix_input(user)
+    await database.collection('Customers')
     .findOne({username: user})
     .then(doc => {
         res.status(200).json(doc)
