@@ -76,11 +76,10 @@ app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
 })
 
 // Admin Login
-app.get("/v1/api/Admins/Login/:id", async (req, res) => {
-    let user = req.params.id
-    user = fix_input(user)
+app.post("/v1/api/Admins/Login", async (req, res) => {
+    console.log(req.body)
     await database.collection('Admins')
-    .findOne({username: user})
+    .findOne({username: req.body.username})
     .then(doc => {
         if(req.body.password != doc.password) {
             res.status(500).json({Failure: "Incorrect password"})
@@ -179,11 +178,9 @@ app.get("/v1/api/Customers/:id", authenticateJWT,async (req, res) => {
 })
 
 // Customer Login
-app.get("/v1/api/Customers/Login/:id", async (req, res) => {
-    let user = req.params.id
-    user = fix_input(user)
+app.post("/v1/api/Customers/Login", async (req, res) => {
     await database.collection('Customers')
-    .findOne({username: user})
+    .findOne({username: req.body.username})
     .then(doc => {
         if(req.body.password != doc.password) {
             res.status(500).json({Failure: "Incorrect password"})
