@@ -4,10 +4,11 @@ const {connectToDb, getDbConn} = require('./database_connection')
 const {ObjectId} = require("mongodb")
 const jwt = require("jsonwebtoken")
 const express_jwt = require("express-jwt")
+const cors = require("cors");
 
 const app = express()
 const port = process.env.PORT || 5000
-const jwt_secret_key = process.env.SECRET_KEY  // node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+const jwt_secret_key = process.env.SECRET_KEY
 
 function generateToken(payload) {
     return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
@@ -33,6 +34,7 @@ function authenticateJWT(req, res, next) {
 }
 
 app.use(express.json())
+app.use(cors());
 
 // Database Connection
 let database
@@ -255,7 +257,7 @@ app.delete("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
 // Products:
 
 // Get all products
-app.get("/v1/api/Products", authenticateJWT,async(req, res) => {
+app.get("/v1/api/Products", async(req, res) => {
     try {
         const  Products = await database.collection("Products").find({}).sort().toArray();
         res.json({ "Products": Products});
