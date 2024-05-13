@@ -5,13 +5,15 @@ const {ObjectId} = require("mongodb")
 const jwt = require("jsonwebtoken")
 const express_jwt = require("express-jwt")
 const cors = require("cors");
+const bcrypt = require('bcrypt')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 const port = process.env.PORT || 5000
 const jwt_secret_key = process.env.SECRET_KEY
 
 function generateToken(payload) {
-    return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
+    return jwt.sign({payload}, jwt_secret_key, {expiresIn: 2*60*1000})
 }
 
 function verifyToken(token) {
@@ -34,7 +36,8 @@ function authenticateJWT(req, res, next) {
 }
 
 app.use(express.json())
-app.use(cors());
+app.use(cors())
+app.use(cookieParser())
 
 // Database Connection
 let database
@@ -77,7 +80,6 @@ app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
 
 // Admin Login
 app.post("/v1/api/Admins/Login", async (req, res) => {
-    console.log(req.body)
     await database.collection('Admins')
     .findOne({username: req.body.username})
     .then(doc => {
@@ -93,8 +95,9 @@ app.post("/v1/api/Admins/Login", async (req, res) => {
 })
 
 // Add new admin
-app.post("/v1/api/Admins", (req, res) => {
+app.post("/v1/api/Admins", async (req, res) => {
     const admin = req.body
+    admin.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
     database.collection("Admins")
     .insertOne(admin)
     .then(doc => {
@@ -194,11 +197,25 @@ app.post("/v1/api/Customers/Login", async (req, res) => {
 })
 
 // Add new Customer
-app.post("/v1/api/Customers", (req, res) => {
-    const admin = req.body
+app.post("/v1/api/Customers", async (req, res) => {
+    const body = req.body
+    try {
+        body.password = await bcrypt.hash(body.password + '', await bcrypt.genSalt())
+    } catch(err) {
+        console.log('error in hashing')
+        res.status(500).json({err: 'Could not hash'})
+        return
+    }
     database.collection("Customers")
-    .insertOne(admin)
+    .insertOne(body)
     .then(doc => {
+        try {
+            const token = generateToken(doc.insertedId)
+            res.cookie('jwt', token, {maxAge: 2*60*100})
+        } catch(err) {
+            console.log(err)
+            return
+        }
         res.status(200).json(doc)
     })
     .catch(err => {
@@ -345,6 +362,18 @@ app.delete("/v1/api/Products/:id", authenticateJWT, (req, res) => {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Cookies : 
+
+app.get('/v1/api/set-cookie', (req, res) => {
+    res.cookie('New User', true)
+})
+
+app.get('/v1/api/get-cookie', (req, res) => {
+    res.json(req.cookies)
+})
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Fix req.params.id as it's received started by ':'
 function fix_input(id) {
     res = ""
@@ -352,4 +381,12 @@ function fix_input(id) {
         res += id[i]
     }
     return res
+}
+
+function get_id(txt) {
+    res = ''
+    for(let i = 14;i < id.length-1;i++) {
+        res += id[i]
+    }
+    return Number(res)
 }
