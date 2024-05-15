@@ -11,7 +11,7 @@ const jwt_secret_key = process.env.SECRET_KEY  // node -e "console.log(require('
 
 function generateToken(payload) {
     return jwt.sign(payload, jwt_secret_key, {expiresIn: '1h'})
-}
+ }
 
 function verifyToken(token) {
     return jwt.verify(token, jwt_secret_key)
@@ -46,6 +46,7 @@ connectToDb((err) => {
 })
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 // Admins:
 
 // Get all admins
@@ -60,7 +61,7 @@ app.get('/v1/api/Admins',authenticateJWT,async (req, res) => {
   });
 
 // Get admin by username
-app.get("/v1/api/Admins/:id", authenticateJWT ,  async (req, res) => {
+app.get("/v1/api/Admins/:id" , authenticateJWT , async (req, res) => {
     let user = req.params.id
     user = fix_input(user)
     await database.collection('Admins')
@@ -135,8 +136,8 @@ app.put("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
 })
 
 // Delete admin by username
-app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
-    let user = req.id
+app.delete("/v1/api/Admins/:id", (req, res) => {
+    let user = req.params.id
     user = fix_input(user)
     database.collection("Admins")
     .deleteOne({username: user})
