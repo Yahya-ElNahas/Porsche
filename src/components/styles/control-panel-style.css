@@ -1,0 +1,77 @@
+.control-panel {
+    position: fixed;
+    width: 60px;
+    height: 100%;
+    background: #1c1c1c;
+    overflow: hidden;
+    transition: 0.5s;
+  }
+  
+  .control-panel:hover {
+    width: 200px;
+  }
+  
+  .control-panel ul {
+    position: relative;
+    height: 100%;
+  }
+  
+  .control-panel ul li {
+    list-style: none;
+  }
+  
+  .control-panel ul li a {
+    left: 0.5px;
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #a1a1a1;
+    transition: 0.3s;
+  }
+  
+  .control-panel ul li a:hover {
+    color: white;
+  }
+  
+  .control-panel ul li a .icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+  }
+  
+  .control-panel ul li a .txt {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .control-panel .logo {
+    margin-bottom: 50px;
+  }
+  
+  .control-panel ul .logo a img {
+    margin-top: 10px;
+    width: 80px;
+    position: absolute;
+    padding-top: 5px;
+  }
+  
+  .control-panel ul .logo a .txt {
+    font-family: '911 Porscha', sans-serif;
+    color: white;
+  }
+  
+  .reload {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }

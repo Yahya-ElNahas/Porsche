@@ -1,0 +1,31 @@
+.home-body {
+    background: linear-gradient(to top, #101010, #202020, #101010);
+    height: 100vh;
+    color: #141414;
+}
+
+.products-main {
+    margin: 0;
+    padding: 130px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 20px;
+    transition: .2s linear;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.products-title {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+@media (min-width: 1080px) {
+    .products-main {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

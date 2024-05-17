@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.about-body {
+    width: 100%;
+    background: linear-gradient(to top, #101010, #202020, #101010);
+    color: white;
+    font-style: normal;
+    min-height: 100vh;
+    transition: width 0.5s; 
+}
+
+.about {
+    display: grid;
+    place-items: center;
+}
+
+.row {
+  width: 80%;
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: repeat(2, 3fr); 
+  grid-gap: 50px;
+  overflow-x: hidden;
+  padding: 5rem 0; 
+
+}
+
+
+
+.row .imgWrapper {
+    overflow: hidden;
+}
+
+.row .imgWrapper img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    transition: transform 0.3s; 
+    border-radius: 10px;
+}
+
+.row .imgWrapper:hover img {
+    transform: scale(1.08);
+}
+
+.row .contentWrapper { 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+   
+}
+.row .contentWrapper span.textWrapper {
+  
+    display: block;
+    font-size: 20px;
+    text-transform: capitalize;
+    display: flex; 
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+   
+}
+
+
+
+.row .contentWrapper h2.text1 span{ 
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+    padding-bottom: 2px;
+    font-family: '911 Porscha', sans-serif;
+    cursor: default;
+    --s: 0.1em;   /* the thickness of the line */
+  --c: #AA0000; /* the color */
+  
+  color: #0000;
+  padding-bottom: var(--s);
+  background: 
+    linear-gradient(70deg,var(--c) 50%,#ffffff 0) calc(100% - var(--_p,-2%))/200% 100%,
+    linear-gradient(var(--c) 0 0) 0% 90%/var(--_p,0%) var(--s) no-repeat;
+  -webkit-background-clip: text,padding-box;
+          background-clip: text,padding-box;
+  transition: 0.56s;
+}h2:hover {--_p: 100%}
+
+.row .contentWrapper p{
+    font-size: 16px;
+    line-height: 25px;
+    padding-bottom: 25px;
+    font-family: monospace;
+}
+
+
+.row .contentWrapper h2.text2 span{ 
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  padding-bottom: 2px;
+  cursor: default;
+  font-family: '911 Porscha', sans-serif;
+  
+  --s: 0.1em;   /* the thickness of the line */
+  --c: #AA0000; /* the color */
+
+color: #0000;
+padding-bottom: var(--s);
+background: 
+  linear-gradient(70deg,var(--c) 50%,#ffffff 0) calc(100% - var(--_p,-1%))/200% 100%,
+  linear-gradient(var(--c) 0 0) 0% 90%/var(--_p,0%) var(--s) no-repeat;
+-webkit-background-clip: text,padding-box;
+        background-clip: text,padding-box;
+transition: 0.56s;
+}h2:hover {--_p: 100%}
+
+.row .contentWrapper p{
+  font-size: 16px;
+  line-height: 25px;
+  padding-bottom: 25px;
+  font-family: monospace;
+}
+
+
+.row .contentWrapper h2.text3 span{ 
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  padding-bottom: 2px;
+  cursor: default;
+  font-family: '911 Porscha', sans-serif;
+  
+  --s: 0.1em;   /* the thickness of the line */
+--c: #AA0000; /* the color */
+
+color: #0000;
+padding-bottom: var(--s);
+background: 
+  linear-gradient(70deg,var(--c) 50%,#ffffff 0) calc(100% - var(--_p,-1%))/200% 100%,
+  linear-gradient(var(--c) 0 0) 0% 90%/var(--_p,0%) var(--s) no-repeat;
+-webkit-background-clip: text,padding-box;
+        background-clip: text,padding-box;
+transition: 0.56s;
+}h2:hover {--_p: 100%}
+
+.row .contentWrapper p{
+  font-size: 24px;
+  line-height: 25px;
+  padding-bottom: 25px;
+  font-family: 'Neueral', sans-serif;
+                                                
+                                                
+                                                
+}

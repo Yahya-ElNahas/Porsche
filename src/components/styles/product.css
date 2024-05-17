@@ -1,0 +1,33 @@
+.product-component {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    transition: .3s;
+}
+
+.product-component h3 {
+    margin-top: -20px;
+    font-size: 25px;
+    color: #444;
+}
+
+.product-component img {
+    height: 60%;
+    width: 70%;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.product-component p {
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.product-component:hover {
+    box-shadow: 0 10px 15px rgba(0,0,0,.3);
+    transform: scale(1.03);
+    cursor: pointer;
+}

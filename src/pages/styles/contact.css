@@ -1,0 +1,104 @@
+@keyframes slideUp {
+    from {
+      bottom: -20%;
+    }
+    to {
+      bottom: 0;
+    }
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .formkolo button:hover, .formkolo button:focus {
+    background-color: rgb(26, 18, 142);
+    color: #fff;
+  }
+  
+  .ids {
+    font-weight: bold;
+    font-size: 13px;
+    position: fixed;
+    bottom: -20%;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background-color: rgba(180, 174, 174, 0.8);
+    animation: slideUp 2s forwards;
+    opacity: 0.9;
+    text-align: center;
+  }
+  
+  .info {
+    color: #000;
+    position: relative;
+    margin: 5px;
+  }
+  
+  .headcontact {
+    padding-top: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'system-ui';
+  }
+  
+  .formkolo {
+    width: 250%;
+    margin: auto;
+    display: flex;
+    margin-left: -70%;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    color: #000000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 9px;
+  }
+ 
+  .formkolo label {
+    margin-top: 10px;
+    margin-bottom: 3px;
+  } 
+  
+  .formkolo button {
+    color: #fff;
+    background-color: rgb(30, 0, 255);
+  }
+  
+  .aloo {
+    font-family: 'Montserrat', sans-serif;
+    color: #09b13b;
+  }
+  
+  .contact-body {
+    background-image: url('/src/assets/wallpaperflare.com_wallpaper (1).jpg');
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  
+  .contact-input, .contact-select, .contact-button {
+    padding: 10px;
+    margin-top: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(208, 197, 197, 0.5);
+    border: 1px solid rgba(53, 50, 50, 0.5);
+    color: #7c5959;
+    border-radius: 4px;
+  }
+  
+  .contact-input textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  

@@ -1,0 +1,78 @@
+.control-panel-custom {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 60px;
+    height: 90vh;
+    background: #1c1c1c;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.control-panel-custom:hover {
+    width: 200px;
+}
+
+.control-panel-custom ul {
+    position: relative;
+    height: 100%;
+}
+
+.control-panel-custom ul li {
+    list-style: none;
+}
+
+.control-panel-custom ul li a {
+    left: 0.5px;
+    position: relative;
+    display: flex;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #a1a1a1;
+    transition: 0.3s;
+}
+
+.control-panel-custom ul li a:hover {
+    color: white;
+}
+
+.control-panel-custom ul li a .icon-custom {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+}
+
+.control-panel-custom ul li a .txt-custom {
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.control-panel-custom .logo-custom {
+    margin-bottom: 50px;
+}
+
+.control-panel-custom ul .logo-custom a img {
+    margin-top: 10px;
+    width: 80px;
+    position: absolute;
+    padding-top: 5px;
+}
+
+.control-panel-custom ul .logo-custom a .txt-custom {
+    font-family: '911 Porscha', sans-serif;
+    color: white;
+}
+
+.reload-custom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
