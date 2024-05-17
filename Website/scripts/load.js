@@ -5,5 +5,5 @@ setTimeout(function() {
 }, 2000);
 setTimeout(function() {
     loading.remove();
-    window.location.href = '/Website/index.html';
+    window.location.href = 'index.html';
 }, 3000);

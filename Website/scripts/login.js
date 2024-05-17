@@ -14,7 +14,8 @@ function login() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
+        window.location.href = 'home.html'
+        
     })
     .catch(error => {
         console.error('Error:', error);

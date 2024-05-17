@@ -184,12 +184,14 @@ app.get("/v1/api/Customers/:id", authenticateJWT,async (req, res) => {
 app.post("/v1/api/Customers/Login", async (req, res) => {
     await database.collection('Customers')
     .findOne({username: req.body.username})
-    .then(doc => {
-        if(req.body.password != doc.password) {
-            res.status(500).json({Failure: "Incorrect password"})
-            return
+    .then(async doc => {
+        const auth = await bcrypt.compare(req.body.password, doc.password)
+        if(auth) {
+            res.status(200).json(doc)
         }
-        res.status(200).json({Success: doc})
+        else {
+            res.status(500).json({Failure: "Incorrect Password"})
+        }
     })
     .catch(err => {
         res.status(500).json({Failure: "Incorrect username"})
@@ -199,10 +201,10 @@ app.post("/v1/api/Customers/Login", async (req, res) => {
 // Add new Customer
 app.post("/v1/api/Customers", async (req, res) => {
     const body = req.body
+    let token
     try {
         body.password = await bcrypt.hash(body.password + '', await bcrypt.genSalt())
     } catch(err) {
-        console.log('error in hashing')
         res.status(500).json({err: 'Could not hash'})
         return
     }
@@ -210,8 +212,8 @@ app.post("/v1/api/Customers", async (req, res) => {
     .insertOne(body)
     .then(doc => {
         try {
-            const token = generateToken(doc.insertedId)
-            res.cookie('jwt', token, {maxAge: 2*60*100})
+            token = generateToken(doc.insertedId)
+            res.cookie('jwt', token, {maxAge: 9*60*100})
         } catch(err) {
             console.log(err)
             return
@@ -365,7 +367,8 @@ app.delete("/v1/api/Products/:id", authenticateJWT, (req, res) => {
 // Cookies : 
 
 app.get('/v1/api/set-cookie', (req, res) => {
-    res.cookie('New User', true)
+    res.cookie('cookie', true)
+    res.send('cookie')
 })
 
 app.get('/v1/api/get-cookie', (req, res) => {
@@ -381,12 +384,4 @@ function fix_input(id) {
         res += id[i]
     }
     return res
-}
-
-function get_id(txt) {
-    res = ''
-    for(let i = 14;i < id.length-1;i++) {
-        res += id[i]
-    }
-    return Number(res)
 }
