@@ -44,7 +44,7 @@ let database
 connectToDb((err) => {
     if(!err) {
         app.listen(port, () => {
-            console.log("server is running on:" + port)
+            console.log("server is running on: " + port)
         })
         database = getDbConn()
     }
