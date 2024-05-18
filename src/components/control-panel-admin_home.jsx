@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import porsche_logo from '../assets/Porsche-Logo.svg'
 import './styles/control-panel-style.css'
 
-function Control_Panel() {
+function Control_Panel(props) {
     return (
         <>
             <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/911-porscha"/>
@@ -28,6 +28,14 @@ function Control_Panel() {
                             <span class="txt">Customers</span>
                         </Link>
                     </li>
+                    {!props.flag && (
+                        <li>
+                        <Link to="/admin_home">
+                            <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span>
+                            <span class="txt">Products</span>
+                        </Link>
+                    </li>
+                    )}
                     <li>
                         <Link to="/add_product">
                             <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span>

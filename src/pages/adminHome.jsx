@@ -40,7 +40,7 @@ function AdminHome() {
 
     return (
         <div className="home-body">
-            <Control_Panel/>
+            <Control_Panel flag={true}/>
             <div className='products-container'>
                 <h1 className='products-title'>Products</h1>
                 <div className='products-main'>

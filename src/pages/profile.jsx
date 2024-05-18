@@ -33,7 +33,7 @@ export default function Profile() {
 
   useEffect(() => {
     if(!Cookies.get('token')) {
-      navigate('/porsche')
+      navigate('/login')
       return
     }
     fetchData();
