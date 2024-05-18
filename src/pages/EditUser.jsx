@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Control_Panel from '../components/control-panel-register';
+import Cookies from 'js-cookie';
 import './styles/register.css';
 
 export default function EditUser() {
@@ -12,7 +13,7 @@ export default function EditUser() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!Cookies.get('token') || !Cookies.get('type') || Cookies.get('type') != 'Admin') {
+        if(!Cookies.get('token') || !Cookies.get('type')) {
             navigate('/porsche')
             return
         }
@@ -22,7 +23,7 @@ export default function EditUser() {
         event.preventDefault();
         
         try {
-            const response = await fetch(`http://localhost:4004/v1/api/Customers/${username}`, {
+            const response = await fetch(`http://localhost:3001/v1/api/Customers/${username}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
