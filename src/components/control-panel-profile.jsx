@@ -1,9 +1,17 @@
 import {Helmet} from 'react-helmet'
 import { Link } from 'react-router-dom'
 import porsche_logo from '../assets/Porsche-Logo.svg'
+import Cookies from 'js-cookie'
 import './styles/control-panel-style.css'
 
-function Control_Panel() {
+function Control_Panel_Customer() {
+
+    const clearCookies = () => {
+        for(const c in Cookies.get()) {
+            Cookies.remove(c)
+        }
+    }
+
     return (
         <>
             <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/911-porscha"/>
@@ -29,16 +37,22 @@ function Control_Panel() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/porsche">
+                        <Link to="/about">
                             <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="txt">Home</span>
+                            <span class="txt">About us</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/contact">
+                            <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                            <span class="txt">Contact us</span>
                         </Link>
                     </li>
                     <div class="reload">
-                        <li>
-                            <Link to="/profile">
-                                <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-                                <span class="txt">Account</span>
+                        <li onClick={clearCookies}>
+                            <Link to="/porsche">
+                                <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                                <span class="txt">Log Out</span>
                             </Link>
                         </li>
                     </div>
@@ -49,4 +63,4 @@ function Control_Panel() {
     )
 }
 
-export default Control_Panel
+export default Control_Panel_Customer

@@ -14,6 +14,7 @@ import ManageCustomers from './pages/manageCustomers.jsx'
 import DeleteCustomer from './pages/deleteCustomer.jsx'
 import EditUser from './pages/EditUser.jsx'
 import Profile from './pages/profile.jsx'
+import AdminRegister from './pages/adminRegister.jsx'
 
 function App() {
     return (
@@ -32,8 +33,9 @@ function App() {
                 <Route path="/delete_product" element={<DeleteProduct/>}/>
                 <Route path="/manage_customers" element={<ManageCustomers/>}/>
                 <Route path="/delete_customer" element={<DeleteCustomer/>}/>
-                <Route path="/EditUser" element={<EditUser/>}/>
+                <Route path="/edit_profile" element={<EditUser/>}/>
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/admin_register" element={<AdminRegister/>}/>
             </Routes>
         </Router>
     )

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import porsche_logo from '../assets/Porsche-Logo.svg'
 import './styles/control-panel-style.css'
 
-function Control_Panel() {
+function Control_Panel_Admin() {
     return (
         <>
             <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/911-porscha"/>
@@ -29,9 +29,9 @@ function Control_Panel() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/porsche">
+                        <Link to="/admin_home">
                             <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="txt">Home</span>
+                            <span class="txt">Products</span>
                         </Link>
                     </li>
                     <div class="reload">
@@ -49,4 +49,4 @@ function Control_Panel() {
     )
 }
 
-export default Control_Panel
+export default Control_Panel_Admin

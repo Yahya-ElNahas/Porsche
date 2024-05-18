@@ -99,7 +99,7 @@ app.post("/v1/api/Admins/Login", async (req, res) => {
 // Add new admin
 app.post("/v1/api/Admins", async (req, res) => {
     const admin = req.body
-    admin.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
+    admin.password = await bcrypt.hash(admin.password, await bcrypt.genSalt())
     database.collection("Admins")
     .insertOne(admin)
     .then(doc => {
@@ -294,6 +294,7 @@ app.get("/v1/api/Products/:id", async(req, res) => {
 // Add new Product
 app.post("/v1/api/Products", authenticateJWT, (req, res) => {
     const product = req.body
+    product.name = product.name.toLowerCase()
     database.collection("Products")
     .insertOne(product)
     .then(doc => {
@@ -344,7 +345,6 @@ app.put("/v1/api/Products/:id", authenticateJWT, (req, res) => {
 app.delete("/v1/api/Products", authenticateJWT,(req, res) => {
     let product = req.body.name
     product = product.toLowerCase()
-    console.log(product)
     database.collection("Products")
     .deleteOne({name: product})
     .then(doc => {

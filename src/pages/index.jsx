@@ -1,11 +1,16 @@
 import { useRef, useState } from 'react';
 import porsche_video from '../assets/video_background.mp4';
 import Control_Panel from '../components/control-panel-index';
+import Control_Panel_Customer from '../components/control-panel-index-customer';
+import Control_Panel_Admin from '../components/control-panel-index-admin';
+import Cookies from 'js-cookie';
 import './styles/index.css';
 
 function Index() {
     const ref = useRef();
     const [playing, setPlaying] = useState(true);
+
+    const type = Cookies.get('type')
 
     const vidclick = () => {
         if (playing) {
@@ -26,7 +31,9 @@ function Index() {
         <div className='index'>
             <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/911-porscha"/>
             <header>
-                <Control_Panel />
+                {type == undefined && (<Control_Panel/>)}
+                {type == 'Admin' && (<Control_Panel_Admin/>)}
+                {type == 'Customer' && (<Control_Panel_Customer/>)}
                 <div className='vid' onClick={vidclick}>
                     <video src={porsche_video} ref={ref} autoPlay loop onLoadStart={setvolume}></video>
                 </div>

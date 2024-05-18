@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './styles/register.css';
 
-function Register() {
+function AdminRegister() {
 
     for (const cookieName in Cookies.get()) {
         Cookies.remove(cookieName);
@@ -25,7 +25,7 @@ function Register() {
         event.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:3001/v1/api/Customers', {
+            const response = await fetch('http://localhost:3001/v1/api/Admins', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,12 +33,7 @@ function Register() {
                 body: JSON.stringify({
                     email,
                     username,
-                    password,
-                    first_name: firstName,
-                    last_name: lastName,
-                    mobile_numbers: [mobileNumber],
-                    addresses: [],
-                    age: new Date().getFullYear() - new Date(dob).getFullYear()
+                    password
                 })
             });
 
@@ -50,10 +45,10 @@ function Register() {
             const token = data.token;
             Cookies.set('token', token, {expires: 1})
             Cookies.set('username', username, {expires: 1})
-            Cookies.set('type', 'Customer', {expires: 1})
-            navigate('/home')
+            Cookies.set('type', 'Admin', {expires: 1})
+            navigate('/admin_home')
         } catch (error) {
-            console.error('Error:', error);
+            window.alert('Error');
         }
     };
 
@@ -76,27 +71,9 @@ function Register() {
                                         <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
                                     </div>
                                 </div>
-                                <div className="input-row">
-                                    <div className="input-group">
-                                        <label htmlFor="first-name">First Name</label>
-                                        <input type="text" name="first-name" id="first-name" className='lbox' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                                    </div>
-                                    <div className="input-group">
-                                        <label htmlFor="last-name">Last Name</label>
-                                        <input type="text" name="last-name" id="last-name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                                    </div>
-                                </div>
                                 <div className="input-group">
                                     <label htmlFor="password">Password</label>
                                     <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                                </div>
-                                <div className="input-group">
-                                    <label htmlFor="mobile-number">Mobile Number</label>
-                                    <input type="tel" name="mobile-number" id="mobile-number" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
-                                </div>
-                                <div className="input-group">
-                                    <label htmlFor="dob">Birthdate</label>
-                                    <input type="date" name="dob" id="dob" value={dob} onChange={(e) => setDob(e.target.value)} />
                                 </div>
                                 <button type="submit" className="btn">Register</button>
                             </form>
@@ -113,4 +90,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default AdminRegister;

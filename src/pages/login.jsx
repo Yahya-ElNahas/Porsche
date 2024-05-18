@@ -1,7 +1,6 @@
 import Control_Panel from '../components/control-panel-login';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from "react-router-dom";
  
 import './styles/register.css';
@@ -14,7 +13,6 @@ export default function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [cookies, setCookie] = useCookies(['username']);
 
     const navigate = useNavigate()
 
@@ -39,8 +37,8 @@ export default function Login() {
             const data = await response.json();
             const token = data.token;
             Cookies.set('token', token, {expires: 1})
-            setCookie('username', username, { path: '/' });
-            setCookie('type', 'Admins', { path: '/' });
+            Cookies.set('username', username, {expires: 1})
+            Cookies.set('type', 'Admin', {expires: 1})
             navigate('/admin_home')
         } catch (error) {
             try {
@@ -53,18 +51,15 @@ export default function Login() {
                         username : username,
                         password : password
                     })
-                });
-                console.log(response)
-    
+                });    
                 if (!response.ok) {
                     throw new Error('Failed to login');
                 }
-    
                 const data = await response.json();
                 const token = data.token;
                 Cookies.set('token', token, {expires: 1})
-                setCookie('username', username, { path: '/' });
-                setCookie('type', 'Customers', { path: '/' });
+                Cookies.set('username', username, {expires: 1})
+                Cookies.set('type', 'Customer', {expires: 1})
                 navigate('/home')
             } catch (error) {
                 window.alert('Incorrect data')

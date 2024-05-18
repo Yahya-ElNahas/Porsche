@@ -11,6 +11,13 @@ export default function EditUser() {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if(!Cookies.get('token') || !Cookies.get('type') || Cookies.get('type') != 'Admin') {
+            navigate('/porsche')
+            return
+        }
+    }, []);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         

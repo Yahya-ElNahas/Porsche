@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Control_Panel from '../components/control-panel-admin_home';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './styles/addProduct.css';
 
 export default function AddProduct() {
+    
+    let navigate = useNavigate()
+
+    useEffect(() => {
+        if(!Cookies.get('token') || !Cookies.get('type') || Cookies.get('type') != 'Admin') {
+            navigate('/porsche')
+            return
+        }
+    }, []);
+
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [imageLink, setImageLink] = useState('');
     const [quantity, setQuantity] = useState('');
-
-    console.log(Cookies.get('jwt'))
-
-    let navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();

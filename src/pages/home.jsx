@@ -7,9 +7,11 @@ import './styles/home.css'
 function Home() {
     const [products, setProducts] = useState([]);
 
-    console.log(Cookies.get('token'))
-
     useEffect(() => {
+        if(!Cookies.get('token') || !Cookies.get('type') || Cookies.get('type') != 'Customer') {
+            navigate('/porsche')
+            return
+        }
         const fetchProducts = async () => {
             try {
                 const response = await fetch('http://localhost:3001/v1/api/Products', {
@@ -22,7 +24,7 @@ function Home() {
                 const data = await response.json();
                 setProducts(data.Products); 
             } catch (error) {
-                console.error(error);
+                window.alert('Error');
             }
         };
         fetchProducts();

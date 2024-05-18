@@ -6,6 +6,16 @@ import Cookies from 'js-cookie';
 import './styles/addProduct.css';
 
 export default function AlterProduct() {
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(!Cookies.get('token') || !Cookies.get('type') || Cookies.get('type') != 'Admin') {
+            navigate('/porsche')
+            return
+        }
+    }, []);
+
     const [name, setName] = useState('');
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
@@ -13,7 +23,6 @@ export default function AlterProduct() {
     const [imageLink, setImageLink] = useState('');
     const [quantity, setQuantity] = useState('');
 
-    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
