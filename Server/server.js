@@ -17,7 +17,7 @@ app.use(cors())
 const port = process.env.PORT || 5000
 
 function generateToken(payload) {
-    return jwt.sign({payload}, process.env.SECRET_KEY, {expiresIn: '1h'})
+    return jwt.sign({payload},process.env.SECRET_KEY, {expiresIn: '1h'})
 }
 
 function verifyToken(token) {
@@ -44,7 +44,7 @@ let database
 connectToDb((err) => {
     if(!err) {
         app.listen(port, () => {
-            console.log("server is running on: " + port)
+            console.log("server is running on:" + port)
         })
         database = getDbConn()
     }
@@ -54,7 +54,7 @@ connectToDb((err) => {
 // Admins:
 
 // Get all admins
-app.get('/v1/api/Admins',authenticateJWT,async (req, res) => {
+app.get('/v1/api/Admins',authenticateJWT,async (req ,  res) => {
     try {
       const admins = await database.collection("Admins").find({}).sort().toArray();
       res.json({"Admins": admins});
