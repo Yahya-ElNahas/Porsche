@@ -23,10 +23,11 @@ export default function EditUser() {
         event.preventDefault();
         
         try {
-            const response = await fetch(`http://localhost:3001/v1/api/Customers/${username}`, {
+            const response = await fetch(`http://localhost:3001/v1/api/Customers/:${username}`, {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'token': ''+Cookies.get('token')
                 },
                 body: JSON.stringify({
                     username,
