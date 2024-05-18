@@ -145,12 +145,12 @@ app.delete("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
     let user = req.id
     user = fix_input(user)
     database.collection("Admins")
-    .deleteOne({username: user})
+    .deleteOne({username:user})
     .then(doc => {
         res.status(200).json(doc)
     })
     .catch(err => {
-        res.status(500).json({err: "Error"})
+        res.status(500).json({err:"Error"})
     })
 })
 
