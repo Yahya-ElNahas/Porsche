@@ -1,12 +1,12 @@
 import Control_Panel from '../components/control-panel-login';
 import Cookies from 'js-cookie';
 import React, { useState } from 'react';
-
+import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from "react-router-dom";
  
 import './styles/register.css';
 
-function Login() {
+export default function Login() {
 
     for (const cookieName in Cookies.get()) {
         Cookies.remove(cookieName);
@@ -14,6 +14,7 @@ function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [cookies, setCookie] = useCookies(['username']);
 
     const navigate = useNavigate()
 
@@ -38,6 +39,8 @@ function Login() {
             const data = await response.json();
             const token = data.token;
             Cookies.set('token', token, {expires: 1})
+            setCookie('username', username, { path: '/' });
+            setCookie('type', 'Admins', { path: '/' });
             navigate('/admin_home')
         } catch (error) {
             try {
@@ -60,6 +63,8 @@ function Login() {
                 const data = await response.json();
                 const token = data.token;
                 Cookies.set('token', token, {expires: 1})
+                setCookie('username', username, { path: '/' });
+                setCookie('type', 'Customers', { path: '/' });
                 navigate('/home')
             } catch (error) {
                 window.alert('Incorrect data')
@@ -100,4 +105,7 @@ function Login() {
     )
 }
 
-export default Login;
+
+
+
+
