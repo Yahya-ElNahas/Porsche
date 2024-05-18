@@ -2,12 +2,19 @@ import React, { useState, useEffect } from 'react'
 import Product from '../components/product.jsx'
 import Control_Panel from '../components/control-panel-home.jsx';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import './styles/home.css'
 
 function Home() {
     const [products, setProducts] = useState([]);
 
+    const navigate = useNavigate()
+
     useEffect(() => {
+        if(Cookies.get('type') && Cookies.get('type') == 'Admin') {
+            navigate('/admin_home')
+            return
+        }
         const fetchProducts = async () => {
             try {
                 const response = await fetch('http://localhost:3001/v1/api/Products', {

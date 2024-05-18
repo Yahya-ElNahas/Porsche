@@ -23,14 +23,14 @@ function Control_Panel_Admin() {
                         </li>
                     </div>
                     <li>
-                        <Link to="/cart">
-                            <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
-                            <span class="txt">Cart</span>
+                        <Link to="/manage_customers">
+                            <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                            <span class="txt">Customers</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="/admin_home">
-                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span>
                             <span class="txt">Products</span>
                         </Link>
                     </li>

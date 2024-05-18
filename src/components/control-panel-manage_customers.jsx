@@ -36,7 +36,7 @@ function Control_Panel() {
                     </li>
                     <div class="reload">
                         <li>
-                            <Link to="/account">
+                            <Link to="/profile">
                                 <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
                                 <span class="txt">Account</span>
                             </Link>

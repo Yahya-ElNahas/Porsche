@@ -26,6 +26,14 @@ export default function AlterProduct() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const updates = {};
+
+        if (name) updates.name = name;
+        if (quantity) updates.quantity = quantity;
+        if (description) updates.description = [description];
+        if (imageLink) updates.imageLink = imageLink;
+        if (price) updates.price = price;
         
         try {
             const response = await fetch('http://localhost:3001/v1/api/Products/:'+productName, {
@@ -34,13 +42,7 @@ export default function AlterProduct() {
                     'Content-Type': 'application/json',
                     'token': ''+Cookies.get('token')
                 },
-                body: JSON.stringify({
-                    name: name,
-                    description: description,
-                    price: '$'+price,
-                    quantity: quantity,
-                    imageLink: imageLink
-                })
+                body: JSON.stringify(updates)
             });
 
             if (!response.ok) {
@@ -67,7 +69,7 @@ export default function AlterProduct() {
                             <form className="form" onSubmit={handleSubmit}>
                                     <div className="input-group">
                                         <label htmlFor="name">Product Name</label>
-                                        <input type="text" name="productname" id="productname" className='lbox' value={productName} onChange={(e) => setProductName(e.target.value)} />
+                                        <input type="text" name="productname" id="productname" className='lbox' value={productName} onChange={(e) => setProductName(e.target.value)} required/>
                                     </div>
                                 <div className="input-row">
                                     <div className="input-group">

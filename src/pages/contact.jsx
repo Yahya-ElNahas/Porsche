@@ -1,11 +1,17 @@
 import Control_Panel from "../components/control-panel-contact";
+import Control_Panel_Customer from '../components/control-panel-contact-customer';
+import Control_Panel_Admin from '../components/control-panel-index-admin';
+import Cookies from 'js-cookie';
 import './styles/contact.css';
 
 function Contact() {
+    const type = Cookies.get('type')
     return (
         <div className="contact-body">
             <header>
-                <Control_Panel />
+            {type == undefined && (<Control_Panel/>)}
+            {type == 'Admin' && (<Control_Panel_Admin/>)}
+            {type == 'Customer' && (<Control_Panel_Customer/>)}
                 <div className="headcontact">
                     <h2>Contact us</h2>
                     <form id="form" className="contactform">

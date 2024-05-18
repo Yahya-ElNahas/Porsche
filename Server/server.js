@@ -111,9 +111,10 @@ app.post("/v1/api/Admins", async (req, res) => {
 })
 
 // Update specific admin data by username
-app.patch("/v1/api/Admins/:id", authenticateJWT, (req, res) => {
+app.patch("/v1/api/Admins/:id", authenticateJWT, async(req, res) => {
     const body = req.body
     let user = req.params.id
+    body.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
     user = fix_input(user)
     database.collection("Admins")
     .updateOne({username: user}, {$set: body})
@@ -221,10 +222,11 @@ app.post("/v1/api/Customers", async (req, res) => {
 })
 
 // Update specific Customer data by username
-app.patch("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
+app.patch("/v1/api/Customers/:id", authenticateJWT, async(req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
+    body.password = await bcrypt.hash(body.password + '', await bcrypt.genSalt())
     database.collection("Customers")
     .updateOne({username: user}, {$set: body})
     .then(doc => {
@@ -308,6 +310,9 @@ app.post("/v1/api/Products", authenticateJWT, (req, res) => {
 // Update specific Product data by name
 app.patch("/v1/api/Products/:id", authenticateJWT, (req, res) => {
     const body = req.body
+    if(body.name) {
+        body.name = body.name.toLowerCase()
+    }
     let id = req.params.id
     id = fix_input(id)
     id = id.toLowerCase()
@@ -365,3 +370,4 @@ function fix_input(id) {
     }
     return res
 }
+

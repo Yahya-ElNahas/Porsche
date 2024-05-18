@@ -1,11 +1,17 @@
 import Control_Panel from '../components/control-panel-about';
+import Control_Panel_Customer from '../components/control-panel-profile';
+import Control_Panel_Admin from '../components/control-panel-index-admin';
+import Cookies from 'js-cookie';
 import './styles/about.css';
 
 function About() {
+    const type = Cookies.get('type')
     return (
         <div className="about-body">
             <link href="https://fonts.cdnfonts.com/css/neueral" rel="stylesheet" />
-            <Control_Panel/>
+            {type == undefined && (<Control_Panel/>)}
+            {type == 'Admin' && (<Control_Panel_Admin/>)}
+            {type == 'Customer' && (<Control_Panel_Customer/>)}
             <header>
                 <div className='about'>
                 <div className="row">

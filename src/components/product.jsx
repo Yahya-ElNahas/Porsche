@@ -4,8 +4,9 @@ export default function Product(props) {
     return (
         <div className="product-component">
             <h3>{props.name}</h3>
-            <img src="" alt="" />
-            <p>{props.price}</p>
+            <img src={`${props.lnk}`} alt="#" />
+            <p>{props.description}</p>
+            <p style={{'fontWeight': 'bold'}}>{props.price}</p>
         </div>
     )
 }
