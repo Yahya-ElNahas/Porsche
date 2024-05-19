@@ -14,6 +14,7 @@ import ManageCustomers from './pages/manageCustomers.jsx'
 import DeleteCustomer from './pages/deleteCustomer.jsx'
 import EditUser from './pages/EditUser.jsx'
 import Profile from './pages/profile.jsx'
+import Cart from './pages/Cart.jsx'
 import AdminRegister from './pages/adminRegister.jsx'
 
 function App() {
@@ -36,9 +37,11 @@ function App() {
                 <Route path="/edit_profile" element={<EditUser/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/admin_register" element={<AdminRegister/>}/>
+                <Route path="/Cart" element={<Cart/>}/>
             </Routes>
         </Router>
     )
 }
 
 export default App
+
