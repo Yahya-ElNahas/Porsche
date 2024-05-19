@@ -114,7 +114,7 @@ app.post("/v1/api/Admins", async (req, res) => {
 app.patch("/v1/api/Admins/:id", authenticateJWT, async(req, res) => {
     const body = req.body
     let user = req.params.id
-    body.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
+    if(body.password) body.password = await bcrypt.hash(body.password, await bcrypt.genSalt())
     user = fix_input(user)
     database.collection("Admins")
     .updateOne({username: user}, {$set: body})
@@ -226,7 +226,7 @@ app.patch("/v1/api/Customers/:id", authenticateJWT, async(req, res) => {
     const body = req.body
     let user = req.params.id
     user = fix_input(user)
-    body.password = await bcrypt.hash(body.password + '', await bcrypt.genSalt())
+    if(body.password) body.password = await bcrypt.hash(body.password + '', await bcrypt.genSalt())
     database.collection("Customers")
     .updateOne({username: user}, {$set: body})
     .then(doc => {

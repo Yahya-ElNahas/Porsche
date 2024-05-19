@@ -87,10 +87,7 @@ export default function EditUser() {
 
     const ptch = async () => {
         const updates = {};
-        if (firstName) updates.first_name = firstName;
-        if (lastName) updates.last_name = lastName;
         if (numbers) updates.mobile_numbers = numbers;
-        if (password) updates.password = password;
         if (addresses) updates.addresses = addresses;
         try {
             const response = await fetch(`http://localhost:3001/v1/api/Customers/:${username}`, {
@@ -138,7 +135,6 @@ export default function EditUser() {
         if(!address || address == '') return
         let i = 0
         while(i < addresses.length && addresses[i] != address) i++
-        console.log(addresses[0])
         addresses.splice(i, 1)
         await ptch()
     }
