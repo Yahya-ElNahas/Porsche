@@ -14,7 +14,7 @@ import ManageCustomers from './pages/manageCustomers.jsx'
 import DeleteCustomer from './pages/deleteCustomer.jsx'
 import EditUser from './pages/EditUser.jsx'
 import Profile from './pages/profile.jsx'
-import Cart from './pages/Cart.jsx'
+import Cart from './pages/cart.jsx'
 import AdminRegister from './pages/adminRegister.jsx'
 
 function App() {

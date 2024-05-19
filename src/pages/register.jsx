@@ -38,7 +38,8 @@ function Register() {
                     last_name: lastName,
                     mobile_numbers: [mobileNumber],
                     addresses: [],
-                    age: new Date().getFullYear() - new Date(dob).getFullYear()
+                    age: new Date().getFullYear() - new Date(dob).getFullYear(),
+                    cart: []
                 })
             });
 

@@ -297,7 +297,7 @@ app.get("/v1/api/Products", async(req, res) => {
 // Get product by product name
 app.get("/v1/api/Products/:id", async(req, res) => {
     let productName = req.params.id
-    productName = fix_input(user)
+    productName = fix_input(productName)
     await database.collection('Admins')
     .findOne({username: productName})
     .then(doc => {

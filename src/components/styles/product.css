@@ -14,15 +14,15 @@
 }
 
 .product-component img {
-    height: 60%;
-    width: 70%;
+    height: 200px;
+    width: 250px;
     border-radius: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
 .product-component p {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #444;
 }
 
@@ -30,4 +30,20 @@
     box-shadow: 0 10px 15px rgba(0,0,0,.3);
     transform: scale(1.03);
     cursor: pointer;
+}
+
+.product-component button {
+    display: inline-block;
+    background: #333;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 8px 25px;
+    margin-bottom: -20px;
+    transition: .3s;
+}
+
+.product-component button:hover {
+    cursor: pointer;
+    letter-spacing: 1px;
 }
