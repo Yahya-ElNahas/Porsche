@@ -31,7 +31,7 @@ export default function AlterProduct() {
 
         if (name) updates.name = name;
         if (quantity) updates.quantity = quantity;
-        if (description) updates.description = [description];
+        if (description) updates.description = description;
         if (imageLink) updates.imageLink = imageLink;
         if (price) updates.price = price;
         

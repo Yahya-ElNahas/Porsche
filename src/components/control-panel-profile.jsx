@@ -31,6 +31,12 @@ function Control_Panel_Customer() {
                         </li>
                     </div>
                     <li>
+                        <Link to="/home">
+                            <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span>
+                            <span class="txt">Products</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/cart">
                             <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
                             <span class="txt">Cart</span>

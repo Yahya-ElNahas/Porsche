@@ -40,7 +40,7 @@ function Home() {
                 <h1 className='products-title'>Products</h1>
                 <div className='products-main'>
                     {products.map(product => (
-                        <Product key={product.id} name={product.name} price={product.price}/>
+                        <Product key={product.id} name={product.name} description={product.description} price={product.price} lnk={product.imageLink}/>
                     ))}
                 </div>
             </div>

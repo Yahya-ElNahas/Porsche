@@ -53,7 +53,8 @@ function Register() {
             Cookies.set('type', 'Customer', {expires: 1})
             navigate('/home')
         } catch (error) {
-            console.error('Error:', error);
+            window.alert('Error');
+            navigate('/register')
         }
     };
 

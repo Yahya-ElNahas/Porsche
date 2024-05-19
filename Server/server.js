@@ -265,6 +265,21 @@ app.delete("/v1/api/Customers", authenticateJWT, (req, res) => {
     })
 })
 
+// Add mobile number for customer by username
+app.patch('/v1/api/Customers/:id', authenticateJWT, async (req, res) => {
+    const body = req.body
+    let user = req.params.id
+    user = fix_input(user)
+    database.collection("Customers")
+    .updateOne({username: user}, {$set: body})
+    .then(doc => {
+        res.status(200).json(doc)
+    })
+    .catch(err => {
+        res.status(500).json({err: "Error"})
+    })
+})
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Products:
 

@@ -63,6 +63,10 @@ export default function Profile() {
                                               <span>{num}, </span>
                                           ))}
                                         </div>
+                                        <div>Addresses: {userdata.addresses.map(address =>(
+                                              <span>{address}, </span>
+                                          ))}
+                                        </div>
                                     </>
                                 )}
                                 <button onClick={() => navigate('/edit_profile')}>Edit</button>
