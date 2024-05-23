@@ -255,6 +255,7 @@ app.put("/v1/api/Customers/:id", authenticateJWT, (req, res) => {
 // Delete Customer by username
 app.delete("/v1/api/Customers", authenticateJWT, (req, res) => {
     let user = req.body.username
+    user = user.toLowerCase()
     database.collection("Customers")
     .deleteOne({username: user})
     .then(doc => {
