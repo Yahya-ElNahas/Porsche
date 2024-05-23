@@ -37,7 +37,7 @@ export default function EditUser() {
             setNum(data.mobile_numbers)
             setAdrs(data.addresses)           
         } catch (error) {
-            window.alert('error')            
+            console.log(error)            
         }
     }
 
@@ -47,7 +47,7 @@ export default function EditUser() {
             navigate('/porsche')
             return
         }
-        fetchData()
+        if(Cookies.get('type') == 'Customer') fetchData()
     }, []);
 
     const handleSubmit = async (event) => {
@@ -61,29 +61,51 @@ export default function EditUser() {
         if (password) updates.password = password;
         if (addresses) updates.addresses = addresses;
 
-        console.log(updates)
-        
-        try {
-            const response = await fetch(`http://localhost:3001/v1/api/Customers/:${username}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'token': ''+Cookies.get('token')
-                },
-                body: JSON.stringify(updates)
-            });
+        if(Cookies.get('type') == 'Customer') {        
+            try {
+                const response = await fetch(`http://localhost:3001/v1/api/Customers/:${username}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': ''+Cookies.get('token')
+                    },
+                    body: JSON.stringify(updates)
+                });
 
-            if (!response.ok) {
-                throw new Error('Failed to update user');
+                if (!response.ok) {
+                    throw new Error('Failed to update user');
+                }
+
+                const data = await response.json();
+                window.alert('Success')
+                navigate("/profile")
+            } catch (error) {
+                window.alert('Error')          
             }
-
-            const data = await response.json();
-            navigate("/profile")
-           
-        } catch (error) {
-            console.log(error)            
         }
-    };
+        else {
+            try {
+                const response = await fetch(`http://localhost:3001/v1/api/Admins/:${username}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': ''+Cookies.get('token')
+                    },
+                    body: JSON.stringify(updates)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update user');
+                }
+
+                const data = await response.json();
+                window.alert('Success')
+                navigate("/profile")
+            } catch (error) {
+                window.alert('Error')            
+            }
+        }
+    }
 
     const ptch = async () => {
         const updates = {};
@@ -104,9 +126,11 @@ export default function EditUser() {
             }
 
             const data = await response.json();
+            window.alert('Success')
             navigate("/profile")
            
         } catch (error) {
+            window.alert('Error')
             navigate("/profile")          
         }
     }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/home.css';
-import Control_Panel from '../components/control-panel-home';
+import Control_Panel_Customer from '../components/control-panel-index-customer';
 import Cookies from 'js-cookie';
 import Product from '../components/product';
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +12,10 @@ export default function Cart() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        if(!Cookies.get('token')) {
+            navigate('/login')
+            return
+        }
         if(Cookies.get('type') && Cookies.get('type') == 'Admin') {
             navigate('/admin_home')
             return
@@ -58,13 +62,13 @@ export default function Cart() {
 
     return (
         <div className="home-body">
-            <Control_Panel/>
+            <Control_Panel_Customer/>
             <div className='products-container'>
-                <h1 className='products-title'>Products</h1>
-                    <button type='button' style={{'margin-left':'100px'}} onClick={clearCart}>Clear Cart</button>
+                <h1 className='products-title'>Cart</h1>
+                    <button className='clr_cart_btn' type='button' style={{'margin-left':'100px'}} onClick={clearCart}>Clear Cart</button>
                 <div className='products-main'>
                     {mycart.map(product => (
-                        <Product name={product[0]} price={product[1]}/>
+                        <Product name={product[0]} price={product[1]} lnk={product[2]}/>
                     ))}
                 </div>
             </div>

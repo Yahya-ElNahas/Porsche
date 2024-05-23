@@ -29,3 +29,14 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+.clr_cart_btn {
+    display: inline-block;
+    background: #333;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 8px 25px;
+    margin-bottom: -20px;
+    transition: .3s;
+}

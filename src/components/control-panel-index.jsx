@@ -23,6 +23,12 @@ function Control_Panel() {
                         </li>
                     </div>
                     <li>
+                        <Link to="/home">
+                            <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span> 
+                            <span class="txt">Products</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/login">
                             <span class="icon"><ion-icon name="log-in-outline"></ion-icon></span> 
                             <span class="txt">Login</span>
@@ -32,6 +38,12 @@ function Control_Panel() {
                         <Link to="/register">
                             <span class="icon"><ion-icon name="person-add-outline"></ion-icon></span>
                             <span class="txt">Register</span>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/admin_register">
+                            <span class="icon"><ion-icon name="person-add-outline"></ion-icon></span>
+                            <span class="txt">Admin Reg</span>
                         </Link>
                     </li>
                     <li>
